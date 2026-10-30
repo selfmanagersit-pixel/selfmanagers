@@ -1,115 +1,165 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selfmanagers — Web Design & Social Media</title>
-  <meta name="description" content="Selfmanagers: sviluppo siti web professionali e gestione social media. Trasformiamo la tua presenza digitale.">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selfmanagers — Web Design & Social Media</title>
+<meta name="description" content="Selfmanagers: sviluppo siti web professionali e gestione social media. Trasformiamo la tua presenza digitale.">
+<meta name="theme-color" content="#F4F1EB">
+<link rel="icon" href="images/logo-purple.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.2.0/swiper-bundle.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js')</script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@14.2.0/swiper-bundle.min.js"></script>
+<script defer src="js/main.js"></script>
 </head>
 <body>
-<div class="cursor"></div>
-<div class="cursor-follower"></div>
-
-<nav>
-  <a href="index.html" class="nav-logo"><img src="images/logo-purple.png" alt="Selfmanagers"></a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="servizi.html">Servizi</a></li>
-    <li><a href="chi-siamo.html">Chi siamo</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="contatti.html" class="nav-cta">Contattaci</a></li>
-  </ul>
-  <div class="hamburger"><span></span><span></span><span></span></div>
-</nav>
-
-<!-- HERO -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Selfmanagers — Home"><img src="images/logo-mark.png" alt="" width="600" height="383"><span>selfmanagers</span></a>
+    <nav aria-label="Principale"><ul class="nav-links"><li><a href="index.html" aria-current="page">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul></nav>
+    <a href="contatti.html" class="btn btn-dark nav-cta">Parliamone <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <button class="menu-btn" aria-label="Apri menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul>
+  <p class="muted">selfmanagers.it@gmail.com<br>+39 331 147 1560 · +39 350 966 4712</p>
+</div>
+<main>
 <section class="hero">
-  <div class="hero-bg">
-    <div class="hero-grid"></div>
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-badge">Agenzia Creativa · Since 2023</div>
-    <h1>Pronto a cambiare<br>le regole del<br><span class="gradient-text">gioco digitale?</span></h1>
-    <p class="hero-sub">Sviluppiamo siti web e gestiamo i tuoi social media con strategia. <br> Un post alla volta, ma con una visione chiara.</p>
-    <div class="hero-actions">
-      <a href="contatti.html" class="btn-primary">Inizia ora <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      <a href="servizi.html" class="btn-secondary">Scopri i servizi</a>
+  <div class="wrap">
+    <div class="hero-top" data-reveal>
+      <span class="eyebrow">Agenzia creativa</span>
+      <span class="eyebrow">Web · Social · Branding</span>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num"><span class="counter" data-target="30" data-suffix="+">30+</span></div>
-        <div class="stat-label">Clienti soddisfatti</div>
+    <h1 class="display" data-split>Pronto a cambiare le regole del <em>gioco digitale?</em></h1>
+    <div class="bento">
+      <div class="tile t-white c-6 intro-tile" data-reveal>
+        <p class="lead">Sviluppiamo siti web e gestiamo i tuoi social media con strategia. Un post alla volta, ma con una visione chiara.</p>
+        <div class="btn-row">
+          <a href="contatti.html" class="btn btn-dark">Inizia ora <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+          <a href="servizi.html" class="btn btn-ghost">Scopri i servizi</a>
+        </div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="counter" data-target="100" data-suffix="+">100+</span></div>
-        <div class="stat-label">Progetti completati</div>
+      <a href="chi-siamo.html" class="tile tile-img tile-link c-3 r-2" data-reveal data-cursor="Team">
+        <img src="images/chi_siamo.webp" alt="Il team Selfmanagers" style="object-position:center top" data-parallax>
+        <span class="tile-arrow" style="z-index:2;color:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <div class="tile-cap"><h4>Giuliano &amp; Nicholas</h4><p>Social strategy · Web development</p></div>
+      </a>
+      <div class="tile t-ink c-3 stat" data-reveal><div class="num"><span data-count="30">30</span>+</div><div class="lbl">Clienti soddisfatti</div></div>
+      <div class="tile t-purple c-3 stat" data-reveal><div class="num"><span data-count="100">100</span>+</div><div class="lbl">Progetti completati</div></div>
+      <div class="tile t-lilac c-3 stat social-tile" data-reveal>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/selfmanagers?igsh=b21jdWtxZGg1ZW9y" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".6"/></svg></a>
+          <a href="https://www.facebook.com/share/1TnaELLBbr/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 21.5v-8h2.8l.5-3.3h-3.3V8.1c0-.9.4-1.7 1.8-1.7H18V3.6s-1.3-.2-2.6-.2c-2.6 0-4.3 1.6-4.3 4.5v2.4H8.2v3.3h2.9v8"/></svg></a>
+        </div>
+        <div class="lbl">Seguici sui social</div>
       </div>
-      <div class="stat-item">
-        <div class="stat-num"><span class="counter" data-target="3" data-suffix="">3</span></div>
-        <div class="stat-label">Anni di esperienza</div>
+      <a href="contatti.html" class="tile t-magenta c-3 tile-link stat" data-reveal>
+        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <div class="h3" style="max-width:9ch">Prima consulenza gratuita</div>
+        <div class="lbl">Senza impegno</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="section-tight">
+  <div class="marquee" aria-hidden="true"><div class="marquee-track">
+    <span>Web Design</span><i>✦</i><span>Social Media</span><i>✦</i><span>Branding</span><i>✦</i><span>Videomaking</span><i>✦</i><span>Graphic Design</span><i>✦</i><span>Logo Design</span><i>✦</i>
+    <span>Web Design</span><i>✦</i><span>Social Media</span><i>✦</i><span>Branding</span><i>✦</i><span>Videomaking</span><i>✦</i><span>Graphic Design</span><i>✦</i><span>Logo Design</span><i>✦</i>
+  </div></div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Cosa facciamo</span><h2 class="h2" data-split>Tutto ciò che serve per <em>emergere online</em></h2></div>
+      <a href="servizi.html" class="btn btn-ghost" data-reveal>Tutti i servizi →</a>
+    </div>
+    <div class="bento">
+      <a href="servizi.html#web" class="tile t-ink c-7 svc tile-link" data-reveal>
+        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="idx">01</span>
+        <div class="tile-foot"><h3 class="h2" style="margin-bottom:.8rem">Web Design<br><em>&amp; Sviluppo</em></h3><p class="muted">Siti vetrina, landing page ed e-commerce veloci, responsive e ottimizzati SEO.</p></div>
+      </a>
+      <a href="servizi.html#social" class="tile t-lilac c-5 svc tile-link" data-reveal>
+        <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="idx">02</span>
+        <div class="tile-foot"><h3 class="h2" style="margin-bottom:.8rem">Social Media <em>Marketing</em></h3><p class="muted">Piani editoriali, contenuti e campagne Meta &amp; Google Ads.</p></div>
+      </a>
+      <a href="servizi.html#graphic" class="tile t-white c-3 tile-link svc-mini" data-reveal><span class="idx">03</span><h3 class="h3 tile-foot">Graphic Design</h3></a>
+      <a href="servizi.html#video" class="tile t-white c-3 tile-link svc-mini" data-reveal><span class="idx">04</span><h3 class="h3 tile-foot">Videomaking</h3></a>
+      <a href="servizi.html#logo" class="tile t-white c-3 tile-link svc-mini" data-reveal><span class="idx">05</span><h3 class="h3 tile-foot">Logo Design</h3></a>
+      <a href="servizi.html#branding" class="tile t-purple c-3 tile-link svc-mini" data-reveal><span class="idx">06</span><h3 class="h3 tile-foot">Branding Completo</h3></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Come lavoriamo</span><h2 class="h2" data-split>Il nostro <em>processo</em></h2></div>
+      <p class="lead" data-reveal>Ogni progetto segue un percorso strutturato per garantire risultati eccellenti.</p>
+    </div>
+    <div class="process-list">
+      <div class="p-row" data-reveal><span class="idx">01</span><h3>Incontro conoscitivo</h3><p>Comprendiamo la tua realtà, la mission e gli obiettivi da raggiungere.</p></div>
+      <div class="p-row" data-reveal><span class="idx">02</span><h3>Strategia su misura</h3><p>Definiamo il piano d'azione più adatto alle tue esigenze e al tuo budget.</p></div>
+      <div class="p-row" data-reveal><span class="idx">03</span><h3>Creazione contenuti</h3><p>Realizziamo grafiche, video e testi ottimizzati per la tua audience.</p></div>
+      <div class="p-row" data-reveal><span class="idx">04</span><h3>Lancio &amp; monitoraggio</h3><p>Pubblichiamo, ottimizziamo e misuriamo i risultati nel tempo.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="carousel">
+  <div class="wrap sec-head">
+    <div><span class="eyebrow">I nostri clienti</span><h2 class="h2" data-split>Aziende che ci <em>hanno scelto</em></h2></div>
+    <div class="sw-nav" data-reveal><button class="sw-prev" aria-label="Precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="sw-next" aria-label="Successivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><a href="portfolio.html" class="btn btn-ghost">Portfolio →</a></div>
+  </div>
+  <div class="carousel-clip">
+    <div class="swiper work-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide logo-slide"><img src="images/portfolio/carosello/logo-eventi.png" alt="Logo Eventi Party Decor" loading="lazy"></div>
+        <div class="swiper-slide"><img src="images/portfolio/carosello/social-1.jpeg" alt="Lavoro social 1" loading="lazy"></div>
+        <div class="swiper-slide logo-fit"><img src="images/portfolio/carosello/social-2.jpeg" alt="Lavoro social 2" loading="lazy"></div>
+        <div class="swiper-slide logo-fit"><img src="images/portfolio/carosello/social-3.jpeg" alt="Lavoro social 3" loading="lazy"></div>
+        <div class="swiper-slide logo-fit"><img src="images/portfolio/carosello/social-4.jpeg" alt="Lavoro social 4" loading="lazy"></div>
+        <div class="swiper-slide"><img src="images/portfolio/carosello/social-5.jpeg" alt="Lavoro social 5" loading="lazy"></div>
+        <div class="swiper-slide logo-fit"><img src="images/portfolio/carosello/social-6.jpeg" alt="Lavoro social 6" loading="lazy"></div>
+        <div class="swiper-slide"><img src="images/portfolio/carosello/social-7.jpeg" alt="Lavoro social 7" loading="lazy"></div>
+        <div class="swiper-slide"><img src="images/portfolio/carosello/social-8.jpeg" alt="Lavoro social 8" loading="lazy"></div>
+        <div class="swiper-slide logo-fit"><img src="images/portfolio/carosello/social-9.jpeg" alt="Lavoro social 9" loading="lazy"></div>
       </div>
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </section>
-
-<!-- PROCESS -->
-<section class="process">
-  <div class="section-label reveal">Come Lavoriamo</div>
-  <h2 class="section-title reveal reveal-delay-1">Il nostro <span class="gradient-text">processo</span></h2>
-  <p class="section-sub reveal reveal-delay-2">Ogni progetto segue un percorso strutturato per garantire risultati eccellenti.</p>
-  <div class="process-steps">
-    <div class="process-step reveal"><div class="step-num">01</div><div class="step-title">Incontro conoscitivo</div><div class="step-desc">Comprendiamo la tua realtà, la mission e gli obiettivi da raggiungere.</div></div>
-    <div class="process-step reveal reveal-delay-1"><div class="step-num">02</div><div class="step-title">Strategia su misura</div><div class="step-desc">Definiamo il piano d'azione più adatto alle tue esigenze e al tuo budget.</div></div>
-    <div class="process-step reveal reveal-delay-2"><div class="step-num">03</div><div class="step-title">Creazione contenuti</div><div class="step-desc">Realizziamo grafiche, video e testi ottimizzati per la tua audience.</div></div>
-    <div class="process-step reveal reveal-delay-3"><div class="step-num">04</div><div class="step-title">Lancio & Monitoraggio</div><div class="step-desc">Pubblichiamo, ottimizziamo e misuriamo i risultati nel tempo.</div></div>
-  </div>
-</section>
-
-<!-- CLIENTS -->
-<section class="clients">
-  <div class="clients-header">
-    <div>
-      <div class="section-label">I Nostri Clienti</div>
-      <h2 class="section-title reveal">Aziende che ci <span class="gradient-text">hanno scelto</span></h2>
+</main>
+<footer class="footer">
+  <div class="footer-in">
+    <div class="footer-cta">
+      <h2 class="h1" data-split>Costruiamo qualcosa di <em>straordinario</em> insieme.</h2>
+      <a href="contatti.html" class="btn btn-light">Consulenza gratuita <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
     </div>
-    <a href="portfolio.html" class="btn-secondary reveal">Vedi il portfolio →</a>
-  </div>
-  <div class="clients-marquee-wrapper">
-    <div class="clients-marquee">
-      <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#5e03fc,#9003fc)"><img src="images/portfolio/carosello/social-1.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#9003fc,#c403fc)"><img src="images/portfolio/carosello/social-2.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#7002d4,#9003fc)"><img src="images/portfolio/carosello/social-3.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#3d01a8,#5e03fc)"><img src="images/portfolio/carosello/social-4.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#a005fc,#5e03fc)"><img src="images/portfolio/carosello/social-5.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#5e03fc,#7a04fc)"><img src="images/portfolio/carosello/social-6.jpeg" alt=""></div></div>
-	<div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#5e03fc,#9003fc)"><img src="images/portfolio/carosello/social-7.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#9003fc,#c403fc)"><img src="images/portfolio/carosello/social-8.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#7002d4,#9003fc)"><img src="images/portfolio/carosello/social-9.jpeg" alt=""></div></div>
+    <div class="footer-grid">
+      <div><h5>Selfmanagers</h5><p>Agenzia creativa: siti web, social media, grafica e branding. Un post alla volta, con una visione chiara.</p></div>
+      <div><h5>Pagine</h5><ul><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul></div>
+      <div><h5>Contatti</h5><ul><li><a href="mailto:selfmanagers.it@gmail.com">selfmanagers.it@gmail.com</a></li><li><a href="tel:+393311471560">+39 331 147 1560</a></li><li><a href="tel:+393509664712">+39 350 966 4712</a></li></ul></div>
+      <div><h5>Social</h5><ul><li><a href="https://www.instagram.com/selfmanagers?igsh=b21jdWtxZGg1ZW9y" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/share/1TnaELLBbr/" target="_blank" rel="noopener">Facebook</a></li></ul></div>
     </div>
+    <div class="wordmark" aria-hidden="true"><img src="images/logo-mark-white.png" alt="" width="600" height="383"><span>selfmanagers</span></div>
+    <div class="footer-bottom"><span>© 2026 Selfmanagers</span><span>Tutti i diritti riservati</span></div>
   </div>
-</section>
-
-<!-- CTA -->
-<section style="background:linear-gradient(135deg,#5e03fc,#9003fc);padding:80px 5%;text-align:center;">
-  <p class="section-label" style="color:rgba(255,255,255,0.7);justify-content:center;margin-bottom:1.5rem;">Pronto a iniziare?</p>
-  <h2 class="reveal" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;color:white;letter-spacing:-0.03em;margin-bottom:1rem;">Costruiamo qualcosa di straordinario<br>insieme.</h2>
-  <p class="reveal reveal-delay-1" style="color:rgba(255,255,255,0.65);margin-bottom:2rem;font-size:1rem;">Contattaci oggi per una consulenza gratuita.</p>
-  <a href="contatti.html" class="reveal reveal-delay-2" style="display:inline-flex;align-items:center;gap:.5rem;background:white;color:#5e03fc;padding:.9rem 2.2rem;border-radius:100px;font-family:'League Spartan',sans-serif;font-weight:800;font-size:.95rem;text-decoration:none;box-shadow:0 12px 40px rgba(0,0,0,0.2);">Contattaci ora →</a>
-</section>
-
-<footer>
-  <a href="index.html" class="footer-logo"><img src="images/logo.png" alt="Selfmanagers"></a>
-  <p class="footer-copy">© 2026 Selfmanagers. Tutti i diritti riservati.</p>
-  <ul class="footer-links">
-    <li><a href="servizi.html">Servizi</a></li>
-    <li><a href="chi-siamo.html">Chi siamo</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="contatti.html">Contatti</a></li>
-  </ul>
 </footer>
-<script src="js/main.js"></script>
+<div class="m-cta" aria-hidden="true"><a href="contatti.html" class="m-cta-main" tabindex="-1">Parliamo del tuo progetto <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a href="https://wa.me/393311471560" target="_blank" rel="noopener" class="m-cta-wa" tabindex="-1" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89S18.6 0 12.05 0zm5.42 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49 2.5 1.08 3 .86 3.57.8.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35z"/></svg></a></div>
+<div class="cursor" aria-hidden="true"></div>
 </body>
 </html>

@@ -1,143 +1,107 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Servizi — Selfmanagers</title>
-  <meta name="description" content="Scopri i servizi di Selfmanagers: web design, social media marketing, graphic design, videomaking, logo design e branding.">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Servizi — Selfmanagers</title>
+<meta name="description" content="Scopri i servizi di Selfmanagers: web design, social media marketing, graphic design, videomaking, logo design e branding.">
+<meta name="theme-color" content="#F4F1EB">
+<link rel="icon" href="images/logo-purple.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js')</script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script defer src="js/main.js"></script>
 </head>
 <body>
-<div class="cursor"></div>
-<div class="cursor-follower"></div>
-
-<nav>
-  <a href="index.html" class="nav-logo"><img src="images/logo-purple.png" alt="Selfmanagers"></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="servizi.html" class="active">Servizi</a></li>
-    <li><a href="chi-siamo.html">Chi siamo</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="contatti.html" class="nav-cta">Contattaci</a></li>
-  </ul>
-  <div class="hamburger"><span></span><span></span><span></span></div>
-</nav>
-
-<div class="page-header">
-  <div class="section-label">I Nostri Servizi</div>
-  <h1>Soluzioni digitali<br><span class="gradient-text">su misura per te</span></h1>
-  <p>Dal sito web ai social media, dalla grafica al branding: tutto quello che serve per emergere online.</p>
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Selfmanagers — Home"><img src="images/logo-mark.png" alt="" width="600" height="383"><span>selfmanagers</span></a>
+    <nav aria-label="Principale"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="servizi.html" aria-current="page">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul></nav>
+    <a href="contatti.html" class="btn btn-dark nav-cta">Parliamone <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <button class="menu-btn" aria-label="Apri menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <ul><li><a href="index.html">Home</a></li><li><a href="servizi.html" aria-current="page">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul>
+  <p class="muted">selfmanagers.it@gmail.com<br>+39 331 147 1560 · +39 350 966 4712</p>
 </div>
-
-<section style="background:white;">
-  <div class="services-grid">
-
-    <div class="service-card reveal" style="padding:3rem;">
-      <div class="s-content">
-        <div class="s-num">01</div>
-        <div class="s-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-        <h3>Web Design & Sviluppo</h3>
-        <p>Progettiamo e sviluppiamo siti web professionali ottimizzati per convertire visitatori in clienti. Ogni sito è veloce, accessibile e posizionato sui motori di ricerca.</p>
-        <ul style="margin-top:1.2rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Siti vetrina e landing page</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> E-commerce e shop online</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Ottimizzazione SEO</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Design responsive mobile-first</li>
-        </ul>
-      </div>
+<main>
+<section class="page-head">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>I nostri servizi</span>
+    <div class="page-head-row">
+      <h1 class="h1" data-split>Soluzioni digitali <em>su misura</em> per te</h1>
+      <p class="lead" data-reveal>Dal sito web ai social media, dalla grafica al branding: tutto quello che serve per emergere online.</p>
     </div>
-
-    <div class="service-card reveal reveal-delay-1" style="padding:3rem;">
-      <div class="s-content">
-        <div class="s-num">02</div>
-        <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M22 4s-2.7 3-8 3H4a2 2 0 0 0-2 2v1a10 10 0 0 0 10 10c5.52 0 10-4.48 10-10V4z"/></svg></div>
-        <h3>Social Media Marketing</h3>
-        <p>Gestiamo i tuoi profili social con strategia data-driven, contenuti creativi e campagne pubblicitarie che portano risultati concreti e misurabili.</p>
-        <ul style="margin-top:1.2rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Gestione Instagram, Facebook, LinkedIn</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Piano editoriale mensile</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Campagne Meta Ads & Google Ads</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Report mensile KPI</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="service-card reveal reveal-delay-2" style="padding:3rem;">
-      <div class="s-content">
-        <div class="s-num">03</div>
-        <div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
-        <h3>Graphic Design</h3>
-        <p>Dal logo ai materiali promozionali, creiamo grafiche che comunicano il tuo brand in modo coerente e professionale su tutti i canali, online e offline.</p>
-        <ul style="margin-top:1.2rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Grafiche per social e web</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Brochure, volantini, locandine</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Visual identity completa</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="service-card reveal" style="padding:3rem;">
-      <div class="s-content">
-        <div class="s-num">04</div>
-        <div class="s-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-        <h3>Videomaking</h3>
-        <p>Il video è il contenuto più potente. Produciamo video professionali per social media, campagne pubblicitarie e presentazioni aziendali.</p>
-        <ul style="margin-top:1.2rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Reels e video per social</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Spot pubblicitari</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Motion graphics e post-produzione</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="service-card reveal reveal-delay-1" style="padding:3rem;">
-      <div class="s-content">
-        <div class="s-num">05</div>
-        <div class="s-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/></svg></div>
-        <h3>Logo Design</h3>
-        <p>Il tuo logo è la prima cosa che i clienti vedono. Progettiamo loghi unici, versatili e memorabili che distinguono il tuo brand dalla concorrenza.</p>
-        <ul style="margin-top:1.2rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Studio del concept e brief</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> 3 proposte creative</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> File in tutti i formati</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="service-card reveal reveal-delay-2" style="padding:3rem;">
-      <div class="s-content">
-        <div class="s-num">06</div>
-        <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-        <h3>Branding Completo</h3>
-        <p>Costruiamo brand forti e coerenti. Dalla strategia di posizionamento all'identità visiva, creiamo un sistema comunicativo che ispira fiducia.</p>
-        <ul style="margin-top:1.2rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Strategia di posizionamento</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Tone of voice e copy</li>
-          <li style="font-size:0.83rem;color:var(--text-muted);display:flex;align-items:center;gap:0.5rem;"><span style="color:var(--purple);font-weight:800;">→</span> Brand book completo</li>
-        </ul>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<section style="background:linear-gradient(135deg,#5e03fc,#9003fc);padding:80px 5%;text-align:center;">
-  <h2 class="reveal" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;color:white;letter-spacing:-0.03em;margin-bottom:1rem;">Hai un progetto in mente?</h2>
-  <p class="reveal reveal-delay-1" style="color:rgba(255,255,255,0.65);margin-bottom:2rem;">La prima consulenza è gratuita e senza impegno.</p>
-  <a href="contatti.html" class="reveal reveal-delay-2" style="display:inline-flex;align-items:center;gap:.5rem;background:white;color:#5e03fc;padding:.9rem 2.2rem;border-radius:100px;font-family:'League Spartan',sans-serif;font-weight:800;font-size:.95rem;text-decoration:none;box-shadow:0 12px 40px rgba(0,0,0,0.2);">Contattaci ora →</a>
+<section class="section" style="padding-top:0">
+  <div class="wrap bento">
+    <article id="web" class="tile t-ink c-7 svc" data-reveal>
+      <div class="svc-head"><div class="ico-box"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><span class="idx">01</span></div>
+      <h3 class="h2">Web Design <em>&amp; Sviluppo</em></h3>
+      <p class="muted">Progettiamo e sviluppiamo siti web professionali ottimizzati per convertire visitatori in clienti. Ogni sito è veloce, accessibile e posizionato sui motori di ricerca.</p>
+      <ul><li>Siti vetrina e landing page</li><li>E-commerce e shop online</li><li>Ottimizzazione SEO</li><li>Design responsive mobile-first</li></ul>
+    </article>
+    <article id="social" class="tile t-purple c-5 svc" data-reveal>
+      <div class="svc-head"><div class="ico-box"><svg viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg></div><span class="idx">02</span></div>
+      <h3 class="h2">Social Media <em>Marketing</em></h3>
+      <p class="muted">Gestiamo i tuoi profili social con strategia data-driven, contenuti creativi e campagne pubblicitarie che portano risultati concreti e misurabili.</p>
+      <ul><li>Gestione Instagram, Facebook, LinkedIn</li><li>Piano editoriale mensile</li><li>Campagne Meta Ads &amp; Google Ads</li><li>Report mensile KPI</li></ul>
+    </article>
+    <article id="graphic" class="tile t-white c-4 svc" data-reveal>
+      <div class="svc-head"><div class="ico-box"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div><span class="idx">03</span></div>
+      <h3 class="h3">Graphic Design</h3>
+      <p class="muted">Dal logo ai materiali promozionali, creiamo grafiche che comunicano il tuo brand in modo coerente su tutti i canali, online e offline.</p>
+      <ul><li>Grafiche per social e web</li><li>Brochure, volantini, locandine</li><li>Visual identity completa</li></ul>
+    </article>
+    <article id="video" class="tile t-lilac c-4 svc" data-reveal>
+      <div class="svc-head"><div class="ico-box"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><span class="idx">04</span></div>
+      <h3 class="h3">Videomaking</h3>
+      <p class="muted">Il video è il contenuto più potente. Produciamo video professionali per social media, campagne pubblicitarie e presentazioni aziendali.</p>
+      <ul><li>Reels e video per social</li><li>Spot pubblicitari</li><li>Motion graphics e post-produzione</li></ul>
+    </article>
+    <article id="logo" class="tile t-white c-4 svc" data-reveal>
+      <div class="svc-head"><div class="ico-box"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/></svg></div><span class="idx">05</span></div>
+      <h3 class="h3">Logo Design</h3>
+      <p class="muted">Il tuo logo è la prima cosa che i clienti vedono. Progettiamo loghi unici, versatili e memorabili che distinguono il tuo brand.</p>
+      <ul><li>Studio del concept e brief</li><li>3 proposte creative</li><li>File in tutti i formati</li></ul>
+    </article>
+    <article id="branding" class="tile t-paper c-12 svc svc-wide" data-reveal>
+      <div>
+        <div class="svc-head"><div class="ico-box"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span class="idx">06</span></div>
+        <h3 class="h2">Branding <em>completo</em></h3>
+        <p class="muted" style="margin-top:.8rem">Costruiamo brand forti e coerenti. Dalla strategia di posizionamento all'identità visiva, creiamo un sistema comunicativo che ispira fiducia.</p>
+      </div>
+      <div><ul><li>Strategia di posizionamento</li><li>Tone of voice e copy</li><li>Brand book completo</li></ul></div>
+    </article>
+  </div>
 </section>
-
-<footer>
-  <a href="index.html" class="footer-logo"><img src="images/logo.png" alt="Selfmanagers"></a>
-  <p class="footer-copy">© 2026 Selfmanagers. Tutti i diritti riservati.</p>
-  <ul class="footer-links">
-    <li><a href="servizi.html">Servizi</a></li>
-    <li><a href="chi-siamo.html">Chi siamo</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="contatti.html">Contatti</a></li>
-  </ul>
+</main>
+<footer class="footer">
+  <div class="footer-in">
+    <div class="footer-cta">
+      <h2 class="h1" data-split>Costruiamo qualcosa di <em>straordinario</em> insieme.</h2>
+      <a href="contatti.html" class="btn btn-light">Consulenza gratuita <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+    <div class="footer-grid">
+      <div><h5>Selfmanagers</h5><p>Agenzia creativa: siti web, social media, grafica e branding. Un post alla volta, con una visione chiara.</p></div>
+      <div><h5>Pagine</h5><ul><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul></div>
+      <div><h5>Contatti</h5><ul><li><a href="mailto:selfmanagers.it@gmail.com">selfmanagers.it@gmail.com</a></li><li><a href="tel:+393311471560">+39 331 147 1560</a></li><li><a href="tel:+393509664712">+39 350 966 4712</a></li></ul></div>
+      <div><h5>Social</h5><ul><li><a href="https://www.instagram.com/selfmanagers?igsh=b21jdWtxZGg1ZW9y" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/share/1TnaELLBbr/" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+    </div>
+    <div class="wordmark" aria-hidden="true"><img src="images/logo-mark-white.png" alt="" width="600" height="383"><span>selfmanagers</span></div>
+    <div class="footer-bottom"><span>© 2026 Selfmanagers</span><span>Tutti i diritti riservati</span></div>
+  </div>
 </footer>
-
-<script src="js/main.js"></script>
+<div class="m-cta" aria-hidden="true"><a href="contatti.html" class="m-cta-main" tabindex="-1">Parliamo del tuo progetto <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a href="https://wa.me/393311471560" target="_blank" rel="noopener" class="m-cta-wa" tabindex="-1" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89S18.6 0 12.05 0zm5.42 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49 2.5 1.08 3 .86 3.57.8.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35z"/></svg></a></div>
+<div class="cursor" aria-hidden="true"></div>
 </body>
 </html>

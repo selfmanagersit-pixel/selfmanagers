@@ -1,159 +1,132 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contatti — SelfManager</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contatti — Selfmanagers</title>
+<meta name="description" content="Contatta Selfmanagers per una consulenza gratuita su sito web, social media, grafica e branding. Rispondiamo entro 24 ore lavorative.">
+<meta name="theme-color" content="#F4F1EB">
+<link rel="icon" href="images/logo-purple.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js')</script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script defer src="js/main.js"></script>
 </head>
 <body>
-<div class="cursor"></div>
-<div class="cursor-follower"></div>
-<nav>
-  <a href="index.html" class="nav-logo"><img src="images/logo-purple.png" alt="SelfManager"></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="servizi.html">Servizi</a></li>
-    <li><a href="chi-siamo.html">Chi siamo</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="contatti.html" class="nav-cta active">Contattaci</a></li>
-  </ul>
-  <div class="hamburger"><span></span><span></span><span></span></div>
-</nav>
-<div class="page-header">
-  <div class="section-label">Contatti</div>
-  <h1>Parliamo del<br>tuo <span class="gradient-text">progetto</span></h1>
-  <p>Siamo pronti ad ascoltarti. Raccontaci la tua idea e costruiremo qualcosa di straordinario insieme.</p>
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Selfmanagers — Home"><img src="images/logo-mark.png" alt="" width="600" height="383"><span>selfmanagers</span></a>
+    <nav aria-label="Principale"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html" aria-current="page">Contatti</a></li></ul></nav>
+    <a href="contatti.html" class="btn btn-dark nav-cta">Parliamone <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <button class="menu-btn" aria-label="Apri menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <ul><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html" aria-current="page">Contatti</a></li></ul>
+  <p class="muted">selfmanagers.it@gmail.com<br>+39 331 147 1560 · +39 350 966 4712</p>
 </div>
-<section class="contact" style="padding-top:80px;">
-  <div class="contact-grid">
-    <div class="contact-info">
-      <div class="section-label" style="color:rgba(144,3,252,0.9);">Scrivici</div>
-      <h2 class="section-title" style="color:white;font-size:2.2rem;">Iniziamo a<br><span class="gradient-text">collaborare</span></h2>
-      <p class="reveal">La prima consulenza è gratuita e senza impegno. Raccontaci dove vuoi arrivare e ti diremo come possiamo aiutarti.</p>
-      <div class="contact-details reveal">
-        <div class="contact-item">
-          <div class="contact-item-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17z"/></svg></div>
-          <div class="contact-item-text">
-            <h5>Telefono</h5>
-            <p>+39 331 147 1560 <span style="opacity:0.45;font-size:0.78rem;">(Giuliano)</span></p>
-            <p>+39 350 966 4712 <span style="opacity:0.45;font-size:0.78rem;">(Nicholas)</span></p>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-          <div class="contact-item-text"><h5>Email</h5><p>selfmanager.it@gmail.com</p></div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-          <div class="contact-item-text"><h5>Orari</h5><p>Lun–Ven, 9:00 – 18:00</p></div>
-        </div>
-      </div>
-      <div class="social-links reveal">
-        <a href="https://www.instagram.com/selfmanagers?igsh=b21jdWtxZGg1ZW9y" target="_blank" class="social-link">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          Instagram
-        </a>
-        <a href="https://www.facebook.com/share/1TnaELLBbr/" target="_blank" class="social-link">
-          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          Facebook
-        </a>
-      </div>
+<main>
+<section class="page-head">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Contatti</span>
+    <div class="page-head-row">
+      <h1 class="h1" data-split>Parliamo del tuo <em>progetto</em></h1>
+      <p class="lead" data-reveal>Siamo pronti ad ascoltarti. Raccontaci la tua idea e costruiremo qualcosa di straordinario insieme.</p>
     </div>
-    <div class="contact-form reveal reveal-delay-1">
-      <h3 style="font-weight:800;font-size:1.2rem;color:white;margin-bottom:0.5rem;">Inviaci un messaggio</h3>
-      <p style="font-size:0.82rem;color:rgba(255,255,255,0.4);margin-bottom:2rem;">Risponderemo entro 24 ore lavorative.</p>
-      <form id="contact-form">
+  </div>
+</section>
 
-        <!-- Selettore canale di contatto -->
-        <div class="form-group">
-          <label>Come preferisci essere contattato? *</label>
-          <div class="channel-selector">
-            <label class="channel-btn active" data-channel="email">
-              <input type="radio" name="canale" value="email" checked>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Email
-            </label>
-            <label class="channel-btn" data-channel="whatsapp">
-              <input type="radio" name="canale" value="whatsapp">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-              WhatsApp
-            </label>
+<section class="section" style="padding-top:0">
+  <div class="wrap bento">
+    <aside class="tile t-ink c-5" data-reveal>
+      <span class="eyebrow">Scrivici</span>
+      <h2 class="h2" style="margin-top:1.2rem">Iniziamo a <em>collaborare</em></h2>
+      <p class="muted" style="margin-top:1rem">La prima consulenza è gratuita e senza impegno. Raccontaci dove vuoi arrivare e ti diremo come possiamo aiutarti.</p>
+      <div class="quick-actions">
+        <a href="https://wa.me/393311471560" target="_blank" rel="noopener" class="qa qa-wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.79a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg><span><b>WhatsApp</b><small>Giuliano · Social</small></span></a>
+        <a href="https://wa.me/393509664712" target="_blank" rel="noopener" class="qa qa-wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.79a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg><span><b>WhatsApp</b><small>Nicholas · Web</small></span></a>
+      </div>
+      <div class="quick-actions qa-socials">
+        <a href="https://www.instagram.com/selfmanagers?igsh=b21jdWtxZGg1ZW9y" target="_blank" rel="noopener" class="qa qa-out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".6"/></svg><span><b>Instagram</b><small>@selfmanagers</small></span></a>
+        <a href="https://www.facebook.com/share/1TnaELLBbr/" target="_blank" rel="noopener" class="qa qa-out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 21.5v-8h2.8l.5-3.3h-3.3V8.1c0-.9.4-1.7 1.8-1.7H18V3.6s-1.3-.2-2.6-.2c-2.6 0-4.3 1.6-4.3 4.5v2.4H8.2v3.3h2.9v8"/></svg><span><b>Facebook</b><small>Selfmanagers</small></span></a>
+      </div>
+      <dl class="c-list">
+        <div class="c-item"><dt>Email</dt><dd><a href="mailto:selfmanagers.it@gmail.com">selfmanagers.it@gmail.com</a></dd></div>
+        <div class="c-item"><dt>Orari</dt><dd>Lun–Ven, 9:00 – 18:00</dd></div>
+      </dl>
+    </aside>
+    <div class="tile t-white c-7" data-reveal>
+      <h2 class="h3">Inviaci un messaggio</h2>
+      <p class="muted" style="font-size:.95rem">Risponderemo entro 24 ore lavorative.</p>
+      <form id="contact-form" class="form stepper" novalidate>
+        <div class="st-head"><span class="st-count"><b>01</b> / 04</span><span class="st-title">Di cosa hai bisogno?</span><div class="st-bar"><i></i></div></div>
+        <fieldset class="step is-on" data-title="Di cosa hai bisogno?">
+          <legend class="field-label">Scegli un servizio</legend>
+          <div class="chips"><label class="chip"><input type="radio" name="servizio" value="Social Media Marketing"><span>Social Media Marketing</span></label><label class="chip"><input type="radio" name="servizio" value="Web Design &amp; Sviluppo"><span>Web Design &amp; Sviluppo</span></label><label class="chip"><input type="radio" name="servizio" value="Graphic Design"><span>Graphic Design</span></label><label class="chip"><input type="radio" name="servizio" value="Videomaking"><span>Videomaking</span></label><label class="chip"><input type="radio" name="servizio" value="Logo Design"><span>Logo Design</span></label><label class="chip"><input type="radio" name="servizio" value="Branding Completo"><span>Branding Completo</span></label><label class="chip"><input type="radio" name="servizio" value="Più servizi insieme"><span>Più servizi insieme</span></label><label class="chip"><input type="radio" name="servizio" value="" checked><span>Non so ancora</span></label></div>
+        </fieldset>
+        <fieldset class="step" data-title="Come ti chiami?">
+          <div class="form-row">
+            <div class="field"><label for="f-nome">Nome *</label><input id="f-nome" type="text" placeholder="Mario" autocomplete="given-name" required></div>
+            <div class="field"><label for="f-cognome">Cognome *</label><input id="f-cognome" type="text" placeholder="Rossi" autocomplete="family-name" required></div>
           </div>
+        </fieldset>
+        <fieldset class="step" data-title="Come ti ricontattiamo?">
+          <div class="field"><span class="field-label">Canale preferito *</span>
+          <div class="channel">
+            <label class="channel-btn active" data-channel="email"><input type="radio" name="canale" value="email" checked><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>Email</label>
+            <label class="channel-btn" data-channel="whatsapp"><input type="radio" name="canale" value="whatsapp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88M20.46 3.49A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.16-3.48-8.41"/></svg>WhatsApp</label>
+          </div>
+          </div>
+          <div class="field"><label for="f-email">Email *</label><input id="f-email" type="email" placeholder="mario@email.it" autocomplete="email" required></div>
+          <div class="field"><label for="f-tel">Telefono</label><input id="f-tel" type="tel" placeholder="+39 333 000 0000" autocomplete="tel"></div>
+        </fieldset>
+        <fieldset class="step" data-title="Raccontaci il progetto">
+          <div class="field"><label for="f-messaggio">Messaggio *</label><textarea id="f-messaggio" placeholder="Cosa fai, dove vuoi arrivare e come possiamo aiutarti..." required></textarea></div>
+        </fieldset>
+        <div class="st-nav">
+          <button type="button" class="btn btn-ghost st-prev">← Indietro</button>
+          <button type="button" class="btn btn-dark st-next">Avanti <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+          <button type="submit" class="btn btn-dark btn-submit"><span class="lbl">Invia la richiesta</span><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
         </div>
-
-        <div class="form-row">
-          <div class="form-group"><label>Nome *</label><input id="f-nome" type="text" placeholder="Mario" required></div>
-          <div class="form-group"><label>Cognome *</label><input id="f-cognome" type="text" placeholder="Rossi" required></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label>Email *</label><input id="f-email" type="email" placeholder="mario@email.it" required></div>
-          <div class="form-group"><label>Telefono</label><input id="f-tel" type="tel" placeholder="+39 333 000 0000"></div>
-        </div>
-        <div class="form-group">
-          <label>Servizio di interesse</label>
-          <select id="f-servizio">
-            <option value="">Nessuno / Non specificato</option>
-            <option>Social Media Marketing</option>
-            <option>Web Design & Sviluppo</option>
-            <option>Graphic Design</option>
-            <option>Videomaking</option>
-            <option>Logo Design</option>
-            <option>Branding Completo</option>
-            <option>Più servizi insieme</option>
-          </select>
-        </div>
-        <div class="form-group"><label>Messaggio *</label><textarea id="f-messaggio" placeholder="Raccontaci il tuo progetto: cosa fai, dove vuoi arrivare e come possiamo aiutarti..." required></textarea></div>
-        <button type="submit" class="btn-submit">
-          Invia la tua richiesta
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
       </form>
-
-      <style>
-        .channel-selector { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
-        .channel-btn {
-          flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-          padding: 0.75rem 1rem; border-radius: 12px; cursor: pointer;
-          border: 1.5px solid rgba(255,255,255,0.12);
-          background: rgba(255,255,255,0.05);
-          color: rgba(255,255,255,0.5);
-          font-family: 'League Spartan', sans-serif; font-weight: 600; font-size: 0.88rem;
-          transition: all 0.2s; user-select: none;
-        }
-        .channel-btn input { display: none; }
-        .channel-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-        .channel-btn.active {
-          border-color: var(--purple); background: rgba(94,3,252,0.15);
-          color: white;
-        }
-        .channel-btn[data-channel="whatsapp"].active {
-          border-color: #25d366; background: rgba(37,211,102,0.12);
-        }
-      </style>
     </div>
   </div>
 </section>
-<section style="background:var(--black);border-top:1px solid rgba(255,255,255,0.06);padding:60px 5% 80px;">
-  <div class="section-label" style="color:rgba(144,3,252,0.9);">FAQ</div>
-  <h2 class="section-title reveal reveal-delay-1" style="color:white;margin-bottom:2.5rem;">Domande <span class="gradient-text">frequenti</span></h2>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:900px;">
-    <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;"><h4 style="font-weight:800;font-size:0.95rem;color:white;margin-bottom:0.7rem;">Quanto costa un sito web?</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.65;">Il costo dipende dalla complessità del progetto. Offriamo soluzioni per ogni budget. Contattaci per un preventivo gratuito e personalizzato.</p></div>
-    <div class="reveal reveal-delay-1" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;"><h4 style="font-weight:800;font-size:0.95rem;color:white;margin-bottom:0.7rem;">In quanto tempo consegnate un sito?</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.65;">Un sito vetrina richiede 2–3 settimane, un e-commerce 4–6 settimane. Vi teniamo sempre aggiornati durante il processo.</p></div>
-    <div class="reveal" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;"><h4 style="font-weight:800;font-size:0.95rem;color:white;margin-bottom:0.7rem;">Gestite i social per ogni settore?</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.65;">Sì! Abbiamo esperienza in moltissimi settori: ristorazione, retail, professioni, servizi e molto altro. Adattiamo la strategia al tuo mercato.</p></div>
-    <div class="reveal reveal-delay-1" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:1.8rem;"><h4 style="font-weight:800;font-size:0.95rem;color:white;margin-bottom:0.7rem;">Offrite assistenza dopo la consegna?</h4><p style="font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.65;">Sì. Offriamo pacchetti di manutenzione e supporto continuo per garantire che il tuo sito funzioni sempre al meglio.</p></div>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">FAQ</span><h2 class="h2" data-split>Domande <em>frequenti</em></h2></div></div>
+    <div class="faq" data-reveal>
+      <details><summary>Quanto costa un sito web?<i></i></summary><div class="ans"><p>Il costo dipende dalla complessità del progetto. Offriamo soluzioni per ogni budget. Contattaci per un preventivo gratuito e personalizzato.</p></div></details>
+      <details><summary>In quanto tempo consegnate un sito?<i></i></summary><div class="ans"><p>Un sito vetrina richiede 2–3 settimane, un e-commerce 4–6 settimane. Vi teniamo sempre aggiornati durante il processo.</p></div></details>
+      <details><summary>Gestite i social per ogni settore?<i></i></summary><div class="ans"><p>Sì! Abbiamo esperienza in moltissimi settori: ristorazione, retail, professioni, servizi e molto altro. Adattiamo la strategia al tuo mercato.</p></div></details>
+      <details><summary>Offrite assistenza dopo la consegna?<i></i></summary><div class="ans"><p>Sì. Offriamo pacchetti di manutenzione e supporto continuo per garantire che il tuo sito funzioni sempre al meglio.</p></div></details>
+    </div>
   </div>
 </section>
-<footer>
-  <a href="index.html" class="footer-logo"><img src="images/logo.png" alt="SelfManager"></a>
-  <p class="footer-copy">© 2026 SelfManager. Tutti i diritti riservati.</p>
-  <ul class="footer-links">
-    <li><a href="servizi.html">Servizi</a></li>
-    <li><a href="chi-siamo.html">Chi siamo</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="contatti.html">Contatti</a></li>
-  </ul>
+</main>
+<footer class="footer no-cta">
+  <div class="footer-in">
+    <div class="footer-cta">
+      <h2 class="h1" data-split>Costruiamo qualcosa di <em>straordinario</em> insieme.</h2>
+      <a href="contatti.html" class="btn btn-light">Consulenza gratuita <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+    <div class="footer-grid">
+      <div><h5>Selfmanagers</h5><p>Agenzia creativa: siti web, social media, grafica e branding. Un post alla volta, con una visione chiara.</p></div>
+      <div><h5>Pagine</h5><ul><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul></div>
+      <div><h5>Contatti</h5><ul><li><a href="mailto:selfmanagers.it@gmail.com">selfmanagers.it@gmail.com</a></li><li><a href="tel:+393311471560">+39 331 147 1560</a></li><li><a href="tel:+393509664712">+39 350 966 4712</a></li></ul></div>
+      <div><h5>Social</h5><ul><li><a href="https://www.instagram.com/selfmanagers?igsh=b21jdWtxZGg1ZW9y" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/share/1TnaELLBbr/" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+    </div>
+    <div class="wordmark" aria-hidden="true"><img src="images/logo-mark-white.png" alt="" width="600" height="383"><span>selfmanagers</span></div>
+    <div class="footer-bottom"><span>© 2026 Selfmanagers</span><span>Tutti i diritti riservati</span></div>
+  </div>
 </footer>
-<script src="js/main.js"></script>
+<div class="cursor" aria-hidden="true"></div>
 </body>
 </html>

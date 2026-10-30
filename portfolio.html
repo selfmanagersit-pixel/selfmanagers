@@ -1,181 +1,189 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio — Selfmanagers</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    .portfolio-postcards-wrap {
-      position: relative; padding: 50px 0; overflow: hidden; background: var(--gray);
-    }
-    .portfolio-postcards-wrap::before,
-    .portfolio-postcards-wrap::after {
-      content: ''; position: absolute; top: 0; bottom: 0; width: 140px; z-index: 2; pointer-events: none;
-    }
-    .portfolio-postcards-wrap::before { left: 0; background: linear-gradient(90deg, var(--gray), transparent); }
-    .portfolio-postcards-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--gray), transparent); }
-
-    .clients-full-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 3rem; }
-    .client-full-box {
-      aspect-ratio: 2/1; background: white; border-radius: 16px;
-      border: 1px solid rgba(94,3,252,0.08);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 0.85rem; color: var(--text-muted);
-      padding: 1rem; text-align: center;
-      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
-    }
-    .client-full-box:hover { border-color: rgba(94,3,252,0.25); color: var(--purple); box-shadow: 0 8px 25px rgba(94,3,252,0.08); }
-    .client-full-box img { max-height: 50px; max-width: 120px; object-fit: contain; filter: grayscale(1); opacity: 0.6; transition: 0.3s; }
-    .client-full-box:hover img { filter: grayscale(0); opacity: 1; }
-
-    @media (max-width: 1100px) { .clients-full-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 768px) { .clients-full-grid { grid-template-columns: repeat(2, 1fr); } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio — Selfmanagers</title>
+<meta name="description" content="I lavori di Selfmanagers: siti web e gestione social media per aziende e attività locali.">
+<meta name="theme-color" content="#F4F1EB">
+<link rel="icon" href="images/logo-purple.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.2.0/swiper-bundle.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('js')</script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@14.2.0/swiper-bundle.min.js"></script>
+<script defer src="js/main.js"></script>
 </head>
 <body>
-<div class="cursor"></div>
-<div class="cursor-follower"></div>
-
-<nav>
-  <a href="index.html" class="nav-logo"><img src="images/logo-purple.png" alt="Selfmanagers"></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="servizi.html">Servizi</a></li>
-    <li><a href="chi-siamo.html">Chi siamo</a></li>
-    <li><a href="portfolio.html" class="active">Portfolio</a></li>
-    <li><a href="contatti.html" class="nav-cta">Contattaci</a></li>
-  </ul>
-  <div class="hamburger"><span></span><span></span><span></span></div>
-</nav>
-
-<div class="page-header">
-  <div class="section-label">Portfolio</div>
-  <h1>I nostri<br><span class="gradient-text">lavori migliori</span></h1>
-  <p>Ogni progetto è una storia di successo. Scopri cosa abbiamo realizzato per i nostri clienti.</p>
-</div>
-
-<!-- PORTFOLIO PROJECTS -->
-<section style="background: white;">
-  <div class="section-label reveal">Progetti</div>
-  <h2 class="section-title reveal reveal-delay-1">Cosa abbiamo <span class="gradient-text">creato</span></h2>
-
-  <div class="portfolio-filters reveal">
-    <button class="filter-btn active" data-filter="all">Tutti</button>
-    <button class="filter-btn" data-filter="web">Web Design</button>
-    <button class="filter-btn" data-filter="social">Social Media</button>
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Selfmanagers — Home"><img src="images/logo-mark.png" alt="" width="600" height="383"><span>selfmanagers</span></a>
+    <nav aria-label="Principale"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html" aria-current="page">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul></nav>
+    <a href="contatti.html" class="btn btn-dark nav-cta">Parliamone <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    <button class="menu-btn" aria-label="Apri menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
   </div>
-
-  <div class="portfolio-grid">
-
-    <!-- SITO WEB (Nicholas) — 1 progetto -->
-    <div class="portfolio-item span-2 reveal" data-cat="web">
-      <div class="portfolio-thumb">
-        <img src="images/portfolio/web/web-1.png" alt="Nome cliente">
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <ul><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html" aria-current="page">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul>
+  <p class="muted">selfmanagers.it@gmail.com<br>+39 331 147 1560 · +39 350 966 4712</p>
+</div>
+<main>
+<section class="page-head">
+  <div class="wrap">
+    <span class="eyebrow" data-reveal>Portfolio</span>
+    <div class="page-head-row pf-head">
+      <div class="pf-head-txt">
+        <h1 class="h1" data-split>I nostri <em>lavori migliori</em></h1>
+        <p class="lead" data-reveal>Qui trovi una selezione dei lavori realizzati: siti web, gestione social e grafiche per i nostri clienti.</p>
       </div>
-      <div class="portfolio-info">
-        <div class="portfolio-tag">Web Design</div>
-        <h1>Macelleria Stuzzicarni e Uliveto Loparco</h1>
-      </div>
+      <div class="pf-mosaic" data-reveal><div class="pm-col pm-up"><div class="pm-track"><figure class="pm-it pm-ph"><img src="images/portfolio/social/social-1.jpeg" alt="Tutto Pronto da Gianni" decoding="async"></figure><figure class="pm-it pm-lg"><img src="images/portfolio/carosello/social-2.jpeg" alt="Logo basket" decoding="async"></figure><figure class="pm-it pm-ph"><img src="images/portfolio/social/social-3.jpeg" alt="Le Primizie dell'Orto" decoding="async"></figure><figure class="pm-it pm-lg"><img src="images/portfolio/carosello/social-6.jpeg" alt="Logo Le Primizie dell'Orto" decoding="async"></figure><figure class="pm-it pm-ph" aria-hidden="true"><img src="images/portfolio/social/social-1.jpeg" alt="" decoding="async"></figure><figure class="pm-it pm-lg" aria-hidden="true"><img src="images/portfolio/carosello/social-2.jpeg" alt="" decoding="async"></figure><figure class="pm-it pm-ph" aria-hidden="true"><img src="images/portfolio/social/social-3.jpeg" alt="" decoding="async"></figure><figure class="pm-it pm-lg" aria-hidden="true"><img src="images/portfolio/carosello/social-6.jpeg" alt="" decoding="async"></figure></div></div><div class="pm-col pm-down"><div class="pm-track"><figure class="pm-it pm-wb"><img src="images/portfolio/web/web-1.png" alt="Sito Macelleria Stuzzicarni & Uliveto Loparco" decoding="async"></figure><figure class="pm-it pm-ph"><img src="images/portfolio/social/social-2.jpeg" alt="Frantoio Latartara" decoding="async"></figure><figure class="pm-it pm-lg"><img src="images/portfolio/carosello/social-9.jpeg" alt="Logo Macelleria Stuzzicarni" decoding="async"></figure><figure class="pm-it pm-ph"><img src="images/portfolio/social/social-4.jpeg" alt="Basket Castellana" decoding="async"></figure><figure class="pm-it pm-lg"><img src="images/portfolio/carosello/social-5.jpeg" alt="Logo" decoding="async"></figure><figure class="pm-it pm-wb" aria-hidden="true"><img src="images/portfolio/web/web-1.png" alt="" decoding="async"></figure><figure class="pm-it pm-ph" aria-hidden="true"><img src="images/portfolio/social/social-2.jpeg" alt="" decoding="async"></figure><figure class="pm-it pm-lg" aria-hidden="true"><img src="images/portfolio/carosello/social-9.jpeg" alt="" decoding="async"></figure><figure class="pm-it pm-ph" aria-hidden="true"><img src="images/portfolio/social/social-4.jpeg" alt="" decoding="async"></figure><figure class="pm-it pm-lg" aria-hidden="true"><img src="images/portfolio/carosello/social-5.jpeg" alt="" decoding="async"></figure></div></div></div>
     </div>
-
-    <!-- SOCIAL MEDIA (Giuliano) -->
-    <!-- Progetto Social 1 -->
-    <div class="portfolio-item reveal" data-cat="social">
-      <div class="portfolio-thumb">
-        <img src="images/portfolio/social/social-1.jpeg" alt="Nome cliente">
-      </div>
-      <div class="portfolio-info">
-        <div class="portfolio-tag">Social Media</div>
-        <h2>Tutto Pronto da Gianni</h2>
-      </div>
-    </div>
-
-    <!-- Progetto Social 2 -->
-    <div class="portfolio-item reveal reveal-delay-1" data-cat="social">
-      <div class="portfolio-thumb">
-		<img src="images/portfolio/social/social-2.jpeg" alt="Nome cliente">
-      </div>
-      <div class="portfolio-info">
-        <div class="portfolio-tag">Social Media</div>
-        <h2>Frantoio Latartara</h2>
-      </div>
-    </div>
-
-    <!-- Progetto Social 3 -->
-    <div class="portfolio-item reveal" data-cat="social">
-      <div class="portfolio-thumb">
-		<img src="images/portfolio/social/social-3.jpeg" alt="Nome cliente">
-      </div>
-      <div class="portfolio-info">
-        <div class="portfolio-tag">Social Media</div>
-        <h2>Le Primizie dell'Orto</h2>
-      </div>
-    </div>
-
-    <!-- Progetto Social 4 (opzionale) -->
-    <div class="portfolio-item reveal reveal-delay-1" data-cat="social">
-      <div class="portfolio-thumb">
-		<img src="images/portfolio/social/social-4.jpeg" alt="Nome cliente">
-      </div>
-      <div class="portfolio-info">
-        <div class="portfolio-tag">Social Media</div>
-        <h2>Basket Castellana</h2>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<!-- POSTCARD GALLERY PORTFOLIO -->
-<div class="portfolio-postcards-wrap">
-  <div class="postcards-track">
-    <!-- Sostituisci con <img src="images/portfolio/carosello/social-N.jpg" alt=""> -->
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#5e03fc,#9003fc)"><img src="images/portfolio/carosello/social-1.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#9003fc,#c403fc)"><img src="images/portfolio/carosello/social-2.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#7002d4,#9003fc)"><img src="images/portfolio/carosello/social-3.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#3d01a8,#5e03fc)"><img src="images/portfolio/carosello/social-4.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#a005fc,#5e03fc)"><img src="images/portfolio/carosello/social-5.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#5e03fc,#7a04fc)"><img src="images/portfolio/carosello/social-6.jpeg" alt=""></div></div>
-	<div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#5e03fc,#9003fc)"><img src="images/portfolio/carosello/social-7.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#9003fc,#c403fc)"><img src="images/portfolio/carosello/social-8.jpeg" alt=""></div></div>
-    <div class="postcard"><div class="postcard-placeholder" style="background:linear-gradient(135deg,#7002d4,#9003fc)"><img src="images/portfolio/carosello/social-9.jpeg" alt=""></div></div>
+<section class="section" style="padding-top:0" id="work">
+  <div class="wrap">
+    <div class="filters" role="group" aria-label="Filtra progetti" data-reveal>
+      <button class="filter-btn active" data-filter="all">Tutti</button>
+      <button class="filter-btn" data-filter="social">Social Media</button>
+      <button class="filter-btn" data-filter="web">Siti web</button>
+    </div>
   </div>
-</div>
 
+  <div class="pf-block sites-block" data-cat="web">
+    <div class="wrap sec-head">
+      <div><span class="eyebrow">Siti web</span><h2 class="h2" data-split>Siti su <em>misura</em></h2></div>
+      <div class="sw-nav" data-reveal><button class="sw-prev" aria-label="Precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="sw-next" aria-label="Successivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    </div>
+    <div class="carousel-clip">
+      <div class="swiper sites-swiper">
+        <div class="swiper-wrapper">
+          <article class="swiper-slide site-card">
+            <button class="site-thumb t-lilac" type="button" data-preview="https://liuzzistudio.com/" data-shot="images/portfolio/web/liuzzi-desktop.webp" data-host="liuzzistudio.com" aria-label="Anteprima live Liuzzi Studio">
+              <div class="phone"><div class="screen" data-live="390x844" data-mode="live" data-url="https://liuzzistudio.com/" data-shot="images/portfolio/web/liuzzi-mobile.webp" data-name="Liuzzi Studio" data-thumb></div></div>
+              <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Anteprima live</span>
+            </button>
+            <div class="site-card-body">
+              <h3>Liuzzi <em>Studio</em></h3>
+              <p class="muted">Studio commercialista · Fasano · Milano</p>
+              <div class="tags"><span class="tag">Editorial</span><span class="tag">Multilingua</span><span class="tag">Booking</span></div>
+              <a href="https://liuzzistudio.com/" target="_blank" rel="noopener" class="site-link">Visita liuzzistudio.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+            </div>
+          </article>
+          <article class="swiper-slide site-card">
+            <button class="site-thumb t-ink" type="button" data-preview="https://www.eventiviviana.it/" data-shot="images/portfolio/web/eventi-desktop.jpg" data-host="eventiviviana.it" aria-label="Anteprima live Eventi Party Decor">
+              <div class="phone"><div class="screen" data-live="390x844" data-mode="live" data-url="https://www.eventiviviana.it/" data-shot="images/portfolio/web/eventi-mobile.webp" data-name="Eventi Party Decor" data-logo="images/portfolio/carosello/logo-eventi.png" data-thumb></div></div>
+              <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Anteprima live</span>
+            </button>
+            <div class="site-card-body">
+              <h3>Eventi <em>Party Decor</em></h3>
+              <p class="muted">E-commerce retail + B2B · Fasano</p>
+              <div class="tags"><span class="tag">3D</span><span class="tag">E-commerce</span><span class="tag">B2B</span></div>
+              <a href="https://www.eventiviviana.it/" target="_blank" rel="noopener" class="site-link">Visita eventiviviana.it <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+            </div>
+          </article>
+          <article class="swiper-slide site-card">
+            <button class="site-thumb t-paper" type="button" data-preview="https://loparco1996.it/" data-shot="images/portfolio/web/loparco-desktop.webp" data-host="loparco1996.it" aria-label="Anteprima live Macelleria Stuzzicarni & Uliveto Loparco">
+              <div class="phone"><div class="screen" data-live="390x844" data-mode="live" data-url="https://loparco1996.it/" data-shot="images/portfolio/web/loparco-mobile.webp" data-name="Uliveto Loparco" data-thumb></div></div>
+              <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Anteprima live</span>
+            </button>
+            <div class="site-card-body">
+              <h3>Macelleria Stuzzicarni <em>& Uliveto Loparco</em></h3>
+              <p class="muted">Doppia attività · Fasano · Monopoli</p>
+              <div class="tags"><span class="tag">Doppio brand</span><span class="tag">Video</span></div>
+              <a href="https://loparco1996.it/" target="_blank" rel="noopener" class="site-link">Visita loparco1996.it <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!-- CTA -->
-<section style="background:linear-gradient(135deg,#5e03fc,#9003fc);padding:80px 5%;text-align:center;">
-  <h2 class="reveal" style="font-size:clamp(2rem,4vw,3rem);font-weight:900;color:white;letter-spacing:-0.03em;margin-bottom:1rem;">Il prossimo successo<br>potrebbe essere il tuo.</h2>
-  <p class="reveal reveal-delay-1" style="color:rgba(255,255,255,0.65);margin-bottom:2rem;">Contattaci oggi e costruiamo qualcosa di straordinario insieme.</p>
-  <a href="contatti.html" class="reveal reveal-delay-2" style="display:inline-flex;align-items:center;gap:.5rem;background:white;color:#5e03fc;padding:.9rem 2.2rem;border-radius:100px;font-family:'League Spartan',sans-serif;font-weight:800;font-size:.95rem;text-decoration:none;">Inizia ora →</a>
+  <div class="wrap">
+    <div class="pf-block" data-cat="social">
+      <div class="sec-head"><div><span class="eyebrow">Gestione social</span><h2 class="h2" data-split>Strategie che <em>fanno crescere</em></h2></div><p class="lead" data-reveal>Piani editoriali, grafiche e contenuti per le attività che seguiamo ogni mese.</p></div>
+      <div class="bento sc-grid">
+      <figure class="tile sc-card c-6 r-2 sc-feat" data-reveal data-lightbox>
+        <img src="images/portfolio/social/social-1.jpeg" alt="Social Tutto Pronto da Gianni" loading="lazy">
+        <figcaption class="sc-info"><span class="tag">Ristorazione</span><h3>Tutto Pronto da Gianni</h3><p>Gestione social e creazione contenuti</p></figcaption>
+      </figure>
+      <figure class="tile sc-card c-6" data-reveal data-lightbox>
+        <img src="images/portfolio/social/social-2.jpeg" alt="Social Frantoio Latartara" loading="lazy">
+        <figcaption class="sc-info"><span class="tag">Frantoio</span><h3>Frantoio Latartara</h3><p>Gestione social e creazione contenuti</p></figcaption>
+      </figure>
+      <figure class="tile sc-card c-3" data-reveal data-lightbox>
+        <img src="images/portfolio/social/social-3.jpeg" alt="Social Le Primizie dell'Orto" loading="lazy">
+        <figcaption class="sc-info"><span class="tag">Ortofrutta</span><h3>Le Primizie dell'Orto</h3><p>Gestione social e creazione contenuti</p></figcaption>
+      </figure>
+      <figure class="tile sc-card c-3" data-reveal data-lightbox>
+        <img src="images/portfolio/social/social-4.jpeg" alt="Social Basket Castellana" loading="lazy">
+        <figcaption class="sc-info"><span class="tag">Sport</span><h3>Basket Castellana</h3><p>Gestione social e creazione contenuti</p></figcaption>
+      </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="pf-block carousel" data-cat="social">
+    <div class="wrap sec-head">
+      <div><span class="eyebrow">Galleria</span><h2 class="h3">Loghi e contenuti <em>realizzati</em></h2></div>
+      <div class="sw-nav" data-reveal><button class="sw-prev" aria-label="Precedente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="sw-next" aria-label="Successivo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    </div>
+    <div class="carousel-clip">
+      <div class="swiper work-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide logo-slide" data-lightbox><img src="images/portfolio/carosello/logo-eventi.png" alt="Logo Eventi Party Decor" loading="lazy"></div>
+        <div class="swiper-slide" data-lightbox><img src="images/portfolio/carosello/social-1.jpeg" alt="Lavoro social 1" loading="lazy"></div>
+        <div class="swiper-slide logo-fit" data-lightbox><img src="images/portfolio/carosello/social-2.jpeg" alt="Lavoro social 2" loading="lazy"></div>
+        <div class="swiper-slide logo-fit" data-lightbox><img src="images/portfolio/carosello/social-3.jpeg" alt="Lavoro social 3" loading="lazy"></div>
+        <div class="swiper-slide logo-fit" data-lightbox><img src="images/portfolio/carosello/social-4.jpeg" alt="Lavoro social 4" loading="lazy"></div>
+        <div class="swiper-slide" data-lightbox><img src="images/portfolio/carosello/social-5.jpeg" alt="Lavoro social 5" loading="lazy"></div>
+        <div class="swiper-slide logo-fit" data-lightbox><img src="images/portfolio/carosello/social-6.jpeg" alt="Lavoro social 6" loading="lazy"></div>
+        <div class="swiper-slide" data-lightbox><img src="images/portfolio/carosello/social-7.jpeg" alt="Lavoro social 7" loading="lazy"></div>
+        <div class="swiper-slide" data-lightbox><img src="images/portfolio/carosello/social-8.jpeg" alt="Lavoro social 8" loading="lazy"></div>
+        <div class="swiper-slide logo-fit" data-lightbox><img src="images/portfolio/carosello/social-9.jpeg" alt="Lavoro social 9" loading="lazy"></div>
+      </div>
+      <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <a href="contatti.html" class="tile t-ink tile-link pf-cta" data-cat="all" data-reveal>
+      <span class="tile-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="eyebrow">Prossimo progetto</span>
+      <h3 class="h2" style="margin-top:1.2rem;max-width:18ch">Il prossimo successo potrebbe essere <em>il tuo.</em></h3>
+    </a>
+  </div>
 </section>
 
-<footer>
-  <a href="index.html" class="footer-logo"><img src="images/logo.png" alt="Selfmanagers"></a>
-  <p class="footer-copy">© 2026 Selfmanagers. Tutti i diritti riservati.</p>
-  <ul class="footer-links">
-    <li><a href="servizi.html">Servizi</a></li>
-    <li><a href="chi-siamo.html">Chi siamo</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="contatti.html">Contatti</a></li>
-  </ul>
+<div class="pv" role="dialog" aria-modal="true" aria-label="Anteprima sito" hidden>
+  <div class="pv-bar"><span class="pv-url"></span><a class="pv-ext" target="_blank" rel="noopener" aria-label="Apri in una nuova scheda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a><button class="pv-close" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+  <div class="pv-frame"></div>
+</div>
+</main>
+<footer class="footer">
+  <div class="footer-in">
+    <div class="footer-cta">
+      <h2 class="h1" data-split>Costruiamo qualcosa di <em>straordinario</em> insieme.</h2>
+      <a href="contatti.html" class="btn btn-light">Consulenza gratuita <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+    </div>
+    <div class="footer-grid">
+      <div><h5>Selfmanagers</h5><p>Agenzia creativa: siti web, social media, grafica e branding. Un post alla volta, con una visione chiara.</p></div>
+      <div><h5>Pagine</h5><ul><li><a href="index.html">Home</a></li><li><a href="servizi.html">Servizi</a></li><li><a href="chi-siamo.html">Chi siamo</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contatti.html">Contatti</a></li></ul></div>
+      <div><h5>Contatti</h5><ul><li><a href="mailto:selfmanagers.it@gmail.com">selfmanagers.it@gmail.com</a></li><li><a href="tel:+393311471560">+39 331 147 1560</a></li><li><a href="tel:+393509664712">+39 350 966 4712</a></li></ul></div>
+      <div><h5>Social</h5><ul><li><a href="https://www.instagram.com/selfmanagers?igsh=b21jdWtxZGg1ZW9y" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/share/1TnaELLBbr/" target="_blank" rel="noopener">Facebook</a></li></ul></div>
+    </div>
+    <div class="wordmark" aria-hidden="true"><img src="images/logo-mark-white.png" alt="" width="600" height="383"><span>selfmanagers</span></div>
+    <div class="footer-bottom"><span>© 2026 Selfmanagers</span><span>Tutti i diritti riservati</span></div>
+  </div>
 </footer>
-
-<script src="js/main.js"></script>
-<script>
-const filterBtns = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    portfolioItems.forEach(item => {
-      item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
-    });
-  });
-});
-</script>
+<div class="m-cta" aria-hidden="true"><a href="contatti.html" class="m-cta-main" tabindex="-1">Parliamo del tuo progetto <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a><a href="https://wa.me/393311471560" target="_blank" rel="noopener" class="m-cta-wa" tabindex="-1" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89S18.6 0 12.05 0zm5.42 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49 2.5 1.08 3 .86 3.57.8.57-.09 1.76-.72 2-1.42.25-.69.25-1.29.18-1.41-.08-.13-.27-.2-.57-.35z"/></svg></a></div>
+<div class="cursor" aria-hidden="true"></div>
 </body>
 </html>

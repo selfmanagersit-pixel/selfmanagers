@@ -1,266 +1,385 @@
-// Custom Cursor — solo su dispositivi con puntatore fine (mouse desktop)
-const cursor = document.querySelector('.cursor');
-const follower = document.querySelector('.cursor-follower');
-const isPointerFine = window.matchMedia('(pointer: fine)').matches;
-if (cursor && follower && isPointerFine) {
-  let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px';
-  });
-  function animateFollower() {
-    followerX += (mouseX - followerX) * 0.12;
-    followerY += (mouseY - followerY) * 0.12;
-    follower.style.left = followerX + 'px'; follower.style.top = followerY + 'px';
-    requestAnimationFrame(animateFollower);
+(() => {
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+const root = document.documentElement;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasGsap = !!(window.gsap && window.ScrollTrigger);
+if (!hasGsap || reduce) root.classList.remove('js');
+
+// ─── LENIS + GSAP ─────────────────────────
+let lenis = null;
+if (hasGsap) {
+  gsap.registerPlugin(ScrollTrigger, ...(window.SplitText ? [SplitText] : []));
+  if (window.Lenis && !reduce) {
+    lenis = new Lenis({ lerp: 0.1, anchors: { offset: -100 } });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
   }
-  animateFollower();
-  document.querySelectorAll('a, button, .service-card, .team-member, .postcard').forEach(el => {
-    el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); follower.classList.add('hover'); });
-    el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); follower.classList.remove('hover'); });
-  });
-} else if (cursor && follower) {
-  // Touch/mobile: nascondi gli elementi cursore
-  cursor.style.display = 'none';
-  follower.style.display = 'none';
 }
 
-// Navbar scroll
-const nav = document.querySelector('nav');
-if (nav) window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
+// ─── NAV ─────────────────────────────────
+const nav = $('#nav');
+let lastY = 0;
+const onScroll = () => {
+  const y = window.scrollY;
+  nav.classList.toggle('is-scrolled', y > 20);
+  nav.classList.toggle('is-hidden', y > 300 && y > lastY && !root.classList.contains('menu-open'));
+  lastY = y;
+};
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-// Hamburger
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-if (hamburger && navLinks) hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+const menuBtn = $('.menu-btn');
+const setMenu = open => {
+  root.classList.toggle('menu-open', open);
+  menuBtn.setAttribute('aria-expanded', open);
+  menuBtn.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
+  lenis && (open ? lenis.stop() : lenis.start());
+  if (open && hasGsap && !reduce) gsap.from('.mobile-menu li', { yPercent: 60, opacity: 0, stagger: .06, duration: .8, delay: .2, ease: 'expo.out' });
+};
+menuBtn.addEventListener('click', () => setMenu(!root.classList.contains('menu-open')));
+document.addEventListener('keydown', e => e.key === 'Escape' && setMenu(false));
 
-// Active nav link
-const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.nav-links a').forEach(link => {
-  if (link.getAttribute('href') === currentPage) link.classList.add('active');
+// ─── LIQUID TEXT ─────────────────────────
+const lqEms = $$('.display em,.h1 em,.h2 em');
+lqEms.forEach(em => {
+  const walk = n => [...n.childNodes].forEach(c => {
+    if (c.nodeType === 1) return walk(c);
+    if (c.nodeType !== 3 || !c.data.trim()) return;
+    const f = document.createDocumentFragment();
+    c.data.split(/(\s+)/).forEach(t => {
+      if (!t) return;
+      if (/^\s+$/.test(t)) return f.appendChild(document.createTextNode(t));
+      const s = document.createElement('span'); s.className = 'lq'; s.dataset.t = t; s.textContent = t; f.appendChild(s);
+    });
+    c.replaceWith(f);
+  });
+  walk(em);
+});
+const lqHeads = [...new Set(lqEms.map(e => e.parentElement.closest('h1,h2,h3,.display,.h1,.h2') || e.parentElement))];
+if ('IntersectionObserver' in window) {
+  const lqIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('lq-run', e.isIntersecting)));
+  lqHeads.forEach(h => lqIO.observe(h));
+} else lqHeads.forEach(h => h.classList.add('lq-run'));
+
+// ─── ANIMATIONS ──────────────────────────
+if (hasGsap && !reduce) {
+  const splitAll = () => $$('[data-split]').forEach(el => {
+    gsap.set(el, { visibility: 'visible' });
+    if (!window.SplitText) return gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    SplitText.create(el, {
+      type: 'lines', mask: 'lines', autoSplit: true,
+      onSplit: s => { if (el.dataset.splitDone) return; el.dataset.splitDone = 1; return gsap.from(s.lines, { yPercent: 110, duration: 1.1, stagger: .09, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } }); }
+    });
+  });
+  document.fonts ? document.fonts.ready.then(splitAll) : splitAll();
+
+  lqHeads.forEach(h =>
+    h.closest('.hero,.page-head')
+      ? gsap.fromTo(h, { '--y': '-0.2em' }, { '--y': '-0.55em', ease: 'none', scrollTrigger: { trigger: h, start: 0, end: 'bottom top', scrub: .5 } })
+      : gsap.fromTo(h, { '--y': '0.5em' }, { '--y': '-0.55em', ease: 'none', scrollTrigger: { trigger: h, start: 'top bottom', end: 'bottom top', scrub: .5 } }));
+
+  gsap.set('[data-reveal]', { y: 40 });
+  ScrollTrigger.batch('[data-reveal]', {
+    start: 'top 90%', once: true,
+    onEnter: b => gsap.to(b, { opacity: 1, y: 0, duration: 1, stagger: .08, ease: 'expo.out', overwrite: true })
+  });
+
+  $$('[data-count]').forEach(el => {
+    const o = { v: 0 }, end = +el.dataset.count;
+    gsap.to(o, { v: end, duration: 2, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 92%', once: true }, onUpdate: () => el.textContent = Math.round(o.v) });
+  });
+
+  $$('[data-parallax]').forEach(img => {
+    gsap.set(img, { scale: 1.15 });
+    gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+
+  // FAQ smooth open
+  $$('.faq details').forEach(d => {
+    const s = $('summary', d), a = $('.ans', d);
+    s.addEventListener('click', e => {
+      e.preventDefault();
+      if (d.open) gsap.to(a, { height: 0, duration: .5, ease: 'expo.out', onComplete: () => { d.open = false; gsap.set(a, { clearProps: 'height' }); ScrollTrigger.refresh(); } });
+      else { d.open = true; gsap.from(a, { height: 0, duration: .6, ease: 'expo.out', onComplete: () => ScrollTrigger.refresh() }); }
+    });
+  });
+
+  // footer wordmark
+  const wm = $('.wordmark');
+  wm && gsap.from(wm.children, { yPercent: 60, opacity: 0, stagger: .1, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: wm, start: 'top 95%', once: true } });
+}
+
+// ─── CURSOR ──────────────────────────────
+const cur = $('.cursor');
+if (cur && hasGsap && matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  const x = gsap.quickTo(cur, 'x', { duration: .45, ease: 'power3' }), y = gsap.quickTo(cur, 'y', { duration: .45, ease: 'power3' });
+  window.addEventListener('mousemove', e => { x(e.clientX); y(e.clientY); cur.classList.add('on'); }, { passive: true });
+  document.addEventListener('mouseleave', () => cur.classList.remove('on'));
+  document.addEventListener('mouseover', e => {
+    const t = e.target.closest('[data-cursor],[data-lightbox],a,button,label,summary');
+    cur.classList.remove('grow', 'link'); cur.textContent = '';
+    if (!t) return;
+    if (t.matches('[data-cursor],[data-lightbox]')) { cur.classList.add('grow'); cur.textContent = t.dataset.cursor || 'Apri'; }
+    else cur.classList.add('link');
+  });
+}
+
+// ─── SWIPER ──────────────────────────────
+$$('.work-swiper').forEach(el => {
+  if (!window.Swiper) return;
+  const sec = el.closest('.carousel');
+  new Swiper(el, {
+    slidesPerView: 'auto', spaceBetween: 14, loop: true, grabCursor: true, speed: 800,
+    autoplay: reduce ? false : { delay: 2600, disableOnInteraction: false, pauseOnMouseEnter: true },
+    navigation: { prevEl: $('.sw-prev', sec), nextEl: $('.sw-next', sec) },
+    pagination: { el: $('.swiper-pagination', el), type: 'progressbar' },
+    keyboard: { enabled: true },
+    a11y: { prevSlideMessage: 'Precedente', nextSlideMessage: 'Successivo' }
+  });
 });
 
-// Scroll Reveal
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+// ─── PORTFOLIO FILTER ────────────────────
+const fBtns = $$('.filter-btn');
+fBtns.forEach(btn => btn.addEventListener('click', () => {
+  fBtns.forEach(b => b.classList.toggle('active', b === btn));
+  const f = btn.dataset.filter;
+  const items = $$('#work [data-cat]');
+  const show = i => f === 'all' || i.dataset.cat === f || i.dataset.cat === 'all';
+  items.forEach(i => i.classList.toggle('is-hidden', !show(i)));
+  if (hasGsap && !reduce) gsap.fromTo(items.filter(show), { opacity: 0, y: 30, scale: .98 }, { opacity: 1, y: 0, scale: 1, duration: .7, stagger: .06, ease: 'expo.out' });
+  $$('.swiper').forEach(w => w.swiper && w.swiper.update());
+  hasGsap && ScrollTrigger.refresh();
+}));
 
-// Counter animation
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  const suffix = el.dataset.suffix || '';
-  const duration = 2000;
-  const step = target / (duration / 16);
-  let current = 0;
-  const timer = setInterval(() => {
-    current += step;
-    if (current >= target) { el.textContent = target + suffix; clearInterval(timer); }
-    else el.textContent = Math.floor(current) + suffix;
-  }, 16);
-}
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.dataset.animated) {
-      entry.target.dataset.animated = true;
-      animateCounter(entry.target);
+// ─── LIGHTBOX ────────────────────────────
+const lb = document.createElement('div');
+lb.className = 'lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Anteprima immagine');
+lb.innerHTML = '<button class="lb-close" aria-label="Chiudi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><img alt="">';
+document.body.appendChild(lb);
+const lbImg = $('img', lb);
+let lastFocus = null;
+const openLb = (src, alt) => { lastFocus = document.activeElement; lbImg.src = src; lbImg.alt = alt || ''; lb.classList.add('open'); lenis && lenis.stop(); $('.lb-close', lb).focus(); };
+const closeLb = () => { lb.classList.remove('open'); lenis && lenis.start(); lastFocus && lastFocus.focus(); };
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-lightbox]');
+  if (!t) return;
+  const img = t.tagName === 'IMG' ? t : $('img', t);
+  if (img) { e.preventDefault(); openLb(t.dataset.full || img.currentSrc || img.src, img.alt); }
+});
+lb.addEventListener('click', e => { if (e.target === lb || e.target.closest('.lb-close')) closeLb(); });
+document.addEventListener('keydown', e => e.key === 'Escape' && lb.classList.contains('open') && closeLb());
+
+
+// ─── SITE SHOWCASE ───────────────────────
+// live: iframe reale scalato · scroll: screenshot a pagina intera che scorre
+const fitLive = sc => {
+  const f = $('iframe', sc); if (!f) return;
+  const [w, h] = sc.dataset.live.split('x').map(Number), k = sc.clientWidth / w;
+  f.style.width = w + 'px'; f.style.height = (sc.clientHeight / k) + 'px'; f.style.transform = `scale(${k})`;
+};
+const fbImg = (src, cls) => { const i = new Image(); i.className = cls; i.alt = ''; i.decoding = 'async'; i.onerror = () => i.remove(); i.src = src; return i; };
+const addPoster = sc => {
+  if ($('.sc-fb', sc) || !sc.dataset.url) return;
+  const d = document.createElement('div'); d.className = 'sc-fb'; d.setAttribute('aria-hidden', 'true');
+  if (sc.dataset.logo) d.appendChild(fbImg(sc.dataset.logo, 'sc-fb-logo'));
+  const n = document.createElement('span'); n.className = 'sc-fb-name'; n.textContent = sc.dataset.name || ''; d.appendChild(n);
+  const h = document.createElement('span'); h.className = 'sc-fb-host'; h.textContent = new URL(sc.dataset.url).hostname.replace('www.', ''); d.appendChild(h);
+  sc.dataset.shot && d.appendChild(fbImg(sc.dataset.shot, 'sc-fb-shot'));
+  sc.appendChild(d);
+};
+const probes = {};
+const probe = url => probes[url] || (probes[url] = Promise.race([
+  fetch(url, { mode: 'no-cors', cache: 'no-store' }),
+  new Promise((_, r) => setTimeout(r, 7000))
+]).then(() => true, () => false));
+const goOffline = sc => { $('iframe', sc)?.remove(); sc.classList.remove('loading', 'lv-ok'); sc.classList.add('is-off'); };
+const mountIframe = (sc, size) => {
+  if ($('iframe', sc) || sc.classList.contains('is-off')) return;
+  if (!navigator.onLine) return goOffline(sc);
+  sc.dataset.live = sc.dataset.live || size;
+  sc.classList.add('loading');
+  probe(sc.dataset.url).then(ok => ok ? attachIframe(sc) : goOffline(sc));
+};
+const attachIframe = sc => {
+  if ($('iframe', sc)) return;
+  const f = document.createElement('iframe');
+  f.title = 'Anteprima live ' + sc.dataset.url;
+  f.setAttribute('allow', 'fullscreen'); f.referrerPolicy = 'strict-origin-when-cross-origin';
+  sc.classList.add('loading');
+  const t = setTimeout(() => sc.classList.contains('loading') && goOffline(sc), 12000);
+  f.addEventListener('load', () => { clearTimeout(t); sc.classList.remove('loading'); sc.classList.add('lv-ok'); });
+  f.addEventListener('error', () => { clearTimeout(t); goOffline(sc); });
+  f.src = sc.dataset.url;
+  sc.prepend(f); fitLive(sc);
+};
+$$('.screen[data-mode="live"]').forEach(addPoster);
+window.addEventListener('offline', () => $$('.screen[data-mode="live"]').forEach(goOffline));
+const ro = new ResizeObserver(es => es.forEach(e => fitLive(e.target)));
+const startLive = sc => { mountIframe(sc, sc.dataset.live); ro.observe(sc); };
+const liveIO = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  liveIO.unobserve(e.target); startLive(e.target);
+}), { rootMargin: '300px' }) : { observe: startLive };
+$$('.screen[data-mode="live"]').forEach(sc => {
+  liveIO.observe(sc);
+  const ov = $('.screen-overlay', sc);
+  ov && ov.addEventListener('click', () => sc.classList.add('is-live'));
+  sc.addEventListener('mouseleave', () => sc.classList.remove('is-live'));
+});
+const toLiveButton = sc => {
+  const isPhone = !!sc.closest('.phone');
+  if (isPhone) return sc.closest('.phone').classList.add('is-missing');
+  const ov = document.createElement('button');
+  ov.className = 'screen-overlay always'; ov.type = 'button';
+  ov.innerHTML = '<span>Carica anteprima live <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>';
+  ov.addEventListener('click', () => { ov.remove(); $('.screen-hint', sc)?.remove(); $('.shot', sc)?.remove(); mountIframe(sc, '1440x900'); ro.observe(sc); sc.classList.add('is-live'); });
+  sc.appendChild(ov);
+};
+$$('.screen[data-mode="scroll"]').forEach(sc => {
+  const img = $('.shot', sc); if (!img) return;
+  let tw = null;
+  const dist = () => Math.max(0, img.offsetHeight - sc.clientHeight);
+  const ready = () => {
+    if (dist() < 20) { $('.screen-hint', sc)?.remove(); return; }
+    if (matchMedia('(hover:hover)').matches) {
+      sc.addEventListener('mouseenter', () => { tw && tw.kill(); tw = gsap.to(img, { y: -dist(), duration: dist() / 700, ease: 'none' }); });
+      sc.addEventListener('mouseleave', () => { tw && tw.kill(); tw = gsap.to(img, { y: 0, duration: .9, ease: 'expo.out' }); });
+    } else if (hasGsap) {
+      gsap.to(img, { y: () => -dist(), ease: 'none', scrollTrigger: { trigger: sc, start: 'top 80%', end: 'bottom 10%', scrub: .6, invalidateOnRefresh: true } });
     }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+  };
+  const fail = () => {
+    const p = img.dataset.poster, phone = sc.closest('.phone');
+    if (p && !img.dataset.failed) { img.dataset.failed = 1; img.src = p; img.classList.add('poster'); img.dataset.posterClass && img.classList.add(img.dataset.posterClass); }
+    else img.remove();
+    $('.screen-hint', sc)?.remove();
+    if (phone) { if (!p) phone.classList.add('is-missing'); return; }
+    if ('embed' in sc.dataset && !$('.screen-overlay', sc)) toLiveButton(sc);
+  };
+  img.addEventListener('error', fail);
+  if (img.complete && !img.naturalWidth && img.getAttribute('src')) queueMicrotask(() => img.isConnected && !img.naturalWidth && !img.dataset.failed && fail());
+  if (!hasGsap) return;
+  img.complete && img.naturalWidth ? ready() : img.addEventListener('load', () => !img.dataset.failed && ready(), { once: true });
+});
 
-// ─── FORM — Email o WhatsApp ──────────────────────────────────────────────────
-// Routing WhatsApp:
-//   "Web Design & Sviluppo" → Nicholas (+39 350 966 4712)
-//   tutti gli altri          → Giuliano (+39 331 147 1560)
 
-const WA_GIULIANO = '393311471560';
-const WA_NICHOLAS = '393509664712';
+// ─── MOBILE CTA ──────────────────────────
+const mcta = $('.m-cta');
+if (mcta) {
+  let footVis = false;
+  const upd = () => {
+    const on = window.scrollY > 520 && !footVis && !root.classList.contains('menu-open');
+    mcta.classList.toggle('show', on); mcta.setAttribute('aria-hidden', !on);
+    $$('a', mcta).forEach(a => a.tabIndex = on ? 0 : -1);
+  };
+  const ft = $('.footer');
+  ft && new IntersectionObserver(es => { footVis = es[0].isIntersecting; upd(); }).observe(ft);
+  window.addEventListener('scroll', upd, { passive: true });
+}
 
-const WEB_SERVICES = ['Web Design & Sviluppo'];
 
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-
-  // Toggle visivo pulsanti canale
-  const channelBtns = document.querySelectorAll('.channel-btn');
-  channelBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      channelBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+// ─── SITES CAROUSEL + LIVE PREVIEW ───────
+$$('.sites-swiper').forEach(el => {
+  if (!window.Swiper) return;
+  const sec = el.closest('.sites-block');
+  new Swiper(el, { slidesPerView: 'auto', spaceBetween: 14, grabCursor: true, speed: 700, navigation: { prevEl: $('.sw-prev', sec), nextEl: $('.sw-next', sec) }, keyboard: { enabled: true } });
+});
+const pv = $('.pv');
+if (pv) {
+  const frame = $('.pv-frame', pv);
+  let back = null;
+  const closePv = () => { pv.hidden = true; frame.innerHTML = ''; lenis && lenis.start(); document.body.style.overflow = ''; back && back.focus(); };
+  $$('[data-preview]').forEach(b => b.addEventListener('click', () => {
+    back = b;
+    frame.innerHTML = ''; frame.classList.remove('lv-ok', 'is-off');
+    const fb = document.createElement('div'); fb.className = 'pv-fb';
+    fb.innerHTML = '<a target="_blank" rel="noopener">Apri ' + b.dataset.host + ' ↗</a>'; $('a', fb).href = b.dataset.preview;
+    b.dataset.shot && fb.appendChild(fbImg(b.dataset.shot, 'pv-shot'));
+    frame.appendChild(fb);
+    if (!navigator.onLine) frame.classList.add('is-off');
+    else probe(b.dataset.preview).then(ok => {
+      if (pv.hidden || !fb.isConnected) return;
+      if (!ok) return frame.classList.add('is-off');
+      const f = document.createElement('iframe');
+      f.src = b.dataset.preview; f.title = 'Anteprima ' + b.dataset.host; f.setAttribute('allow', 'fullscreen'); f.referrerPolicy = 'strict-origin-when-cross-origin';
+      const t = setTimeout(() => { if (!frame.classList.contains('lv-ok')) { f.remove(); frame.classList.add('is-off'); } }, 12000);
+      f.addEventListener('load', () => { clearTimeout(t); frame.classList.add('lv-ok'); });
+      frame.appendChild(f);
     });
-  });
+    $('.pv-url', pv).textContent = b.dataset.host; $('.pv-ext', pv).href = b.dataset.preview;
+    pv.hidden = false; lenis && lenis.stop(); document.body.style.overflow = 'hidden'; $('.pv-close', pv).focus();
+  }));
+  $('.pv-close', pv).addEventListener('click', closePv);
+  document.addEventListener('keydown', e => e.key === 'Escape' && !pv.hidden && closePv());
+}
 
-  contactForm.addEventListener('submit', (e) => {
+
+// ─── STEPPER ─────────────────────────────
+const stp = $('#contact-form.stepper');
+if (stp) {
+  const steps = $$('.step', stp), n = steps.length;
+  let cur = 0;
+  const show = (i, back) => {
+    steps.forEach((s, k) => { s.classList.toggle('is-on', k === i); s.classList.toggle('is-back', !!back && k === i); });
+    cur = i;
+    $('.st-count b', stp).textContent = String(i + 1).padStart(2, '0');
+    $('.st-title', stp).textContent = steps[i].dataset.title;
+    $('.st-bar i', stp).style.width = ((i + 1) / n * 100) + '%';
+    stp.classList.toggle('at-first', i === 0); stp.classList.toggle('at-last', i === n - 1);
+    const f = $('input:not([type=radio]),textarea', steps[i]); f && matchMedia('(hover:hover)').matches && f.focus({ preventScroll: true });
+    hasGsap && ScrollTrigger.refresh();
+  };
+  const valid = i => {
+    let ok = true;
+    $$('input[required],textarea[required]', steps[i]).forEach(el => {
+      const bad = !el.value.trim() || !el.checkValidity();
+      el.closest('.field').classList.toggle('invalid', bad);
+      if (bad && ok) { ok = false; el.focus(); }
+    });
+    return ok;
+  };
+  $('.st-next', stp).addEventListener('click', () => valid(cur) && show(cur + 1));
+  $('.st-prev', stp).addEventListener('click', () => cur > 0 && show(cur - 1, true));
+  stp.addEventListener('input', e => e.target.closest('.field')?.classList.remove('invalid'));
+  stp.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT' && cur < n - 1) { e.preventDefault(); valid(cur) && show(cur + 1); } });
+  stp.addEventListener('submit', e => { if (!steps.every((_, k) => valid(k))) { e.preventDefault(); e.stopImmediatePropagation(); const bad = steps.findIndex(s => $('.invalid', s)); show(bad < 0 ? 0 : bad); } }, true);
+  stp.addEventListener('reset', () => setTimeout(() => show(0, true), 0));
+  show(0);
+}
+
+// ─── FORM — Email o WhatsApp ─────────────
+// "Web Design & Sviluppo" → Nicholas · altri servizi → Giuliano
+const WA_GIULIANO = '393311471560', WA_NICHOLAS = '393509664712';
+const EMAIL = 'selfmanagers.it@gmail.com';
+const WEB_SERVICES = ['Web Design & Sviluppo', 'Branding Completo', 'Più servizi insieme', ''];
+const form = $('#contact-form');
+if (form) {
+  const chBtns = $$('.channel-btn', form);
+  chBtns.forEach(b => b.addEventListener('change', () => chBtns.forEach(x => x.classList.toggle('active', x === b))));
+  form.addEventListener('submit', e => {
     e.preventDefault();
-
-    const nome      = document.getElementById('f-nome').value.trim();
-    const cognome   = document.getElementById('f-cognome').value.trim();
-    const email     = document.getElementById('f-email').value.trim();
-    const tel       = document.getElementById('f-tel').value.trim();
-    const servizio  = document.getElementById('f-servizio').value.trim();
-    const msg       = document.getElementById('f-messaggio').value.trim();
-    const canale    = document.querySelector('input[name="canale"]:checked').value;
-    const nomeCompleto = `${nome} ${cognome}`;
-
-    // Determina a chi va il messaggio WhatsApp
-    const isWebService = WEB_SERVICES.includes(servizio);
-    const waNumber     = isWebService ? WA_NICHOLAS : WA_GIULIANO;
-    const waDestinatario = isWebService ? 'Nicholas' : 'Giuliano';
-
+    const v = id => $('#' + id).value.trim();
+    const nome = `${v('f-nome')} ${v('f-cognome')}`, email = v('f-email'), tel = v('f-tel'), servizio = ($('input[name="servizio"]:checked', form) || {}).value || '', msg = v('f-messaggio');
+    const canale = $('input[name="canale"]:checked', form).value;
+    const isWeb = WEB_SERVICES.includes(servizio);
     if (canale === 'email') {
-      const subject = encodeURIComponent(
-        `Richiesta da ${nomeCompleto}${servizio ? ' — ' + servizio : ''}`
-      );
+      const subject = encodeURIComponent(`Richiesta da ${nome}${servizio ? ' — ' + servizio : ''}`);
       const body = encodeURIComponent(
-        `Ciao Selfmanagers,\n\n` +
-        `Mi chiamo ${nomeCompleto} e vi scrivo tramite il modulo di contatto del sito.\n\n` +
-        `━━━━━━━━━━━━━━━━━━━━━━\n` +
-        `• Email: ${email}\n` +
-        (tel ? `• Telefono: ${tel}\n` : '') +
-        (servizio ? `• Servizio di interesse: ${servizio}\n` : '') +
-        `━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-        `• Messaggio:\n${msg}\n\n` +
-        `In attesa di una vostra risposta,\n${nomeCompleto}`
-      );
-      window.location.href = `mailto:selfmanagers.it@gmail.com?subject=${subject}&body=${body}`;
-
+        `Ciao Selfmanagers,\n\nMi chiamo ${nome} e vi scrivo tramite il modulo di contatto del sito.\n\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━\n• Email: ${email}\n` + (tel ? `• Telefono: ${tel}\n` : '') + (servizio ? `• Servizio di interesse: ${servizio}\n` : '') +
+        `━━━━━━━━━━━━━━━━━━━━━━\n\n• Messaggio:\n${msg}\n\nIn attesa di una vostra risposta,\n${nome}`);
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
     } else {
-      // WhatsApp → numero corretto in base al servizio
-      const waText = encodeURIComponent(
-        `Ciao ${waDestinatario}! 👋\n\n` +
-        `Sono *${nomeCompleto}* e vi contatto tramite il sito web.\n\n` +
-        `📧 Email: ${email}\n` +
-        (tel ? `📞 Telefono: ${tel}\n` : '') +
-        (servizio ? `🎯 Servizio: ${servizio}\n` : '') +
-        `\n💬 ${msg}`
-      );
-      window.open(`https://wa.me/${waNumber}?text=${waText}`, '_blank');
+      const text = encodeURIComponent(
+        `Ciao ${isWeb ? 'Nicholas' : 'Giuliano'}! 👋\n\nSono *${nome}* e vi contatto tramite il sito web.\n\n📧 Email: ${email}\n` +
+        (tel ? `📞 Telefono: ${tel}\n` : '') + (servizio ? `🎯 Servizio: ${servizio}\n` : '') + `\n💬 ${msg}`);
+      window.open(`https://wa.me/${isWeb ? WA_NICHOLAS : WA_GIULIANO}?text=${text}`, '_blank', 'noopener');
     }
-
-    // Feedback visivo
-    const btn = contactForm.querySelector('.btn-submit');
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = canale === 'email'
-      ? `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="white" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Email aperta!`
-      : `<svg viewBox="0 0 24 24" width="18" height="18" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg> WhatsApp aperto!`;
-    btn.style.background = canale === 'email'
-      ? 'linear-gradient(135deg, #22c55e, #16a34a)'
-      : 'linear-gradient(135deg, #25d366, #128c7e)';
-
-    setTimeout(() => {
-      btn.innerHTML = originalHTML;
-      btn.style.background = '';
-      contactForm.reset();
-      channelBtns.forEach((b, i) => b.classList.toggle('active', i === 0));
-    }, 3000);
+    const btn = $('.btn-submit', form), lbl = $('.lbl', btn), orig = lbl.textContent;
+    btn.classList.add('done'); lbl.textContent = canale === 'email' ? 'Email aperta!' : 'WhatsApp aperto!';
+    setTimeout(() => { btn.classList.remove('done'); lbl.textContent = orig; form.reset(); chBtns.forEach((b, i) => b.classList.toggle('active', !i)); }, 3000);
   });
 }
-
-// ─── LIGHTBOX — hover preview (0.5s) + click locked ──────────────────────────
-(function () {
-  const HOVER_DELAY = 500;
-
-  const overlay = document.createElement('div');
-  overlay.id = 'lb-overlay';
-  overlay.innerHTML = `
-    <div id="lb-box">
-      <button id="lb-close" aria-label="Chiudi">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
-      <img id="lb-img" src="" alt="">
-    </div>`;
-  document.body.appendChild(overlay);
-
-  const lbOverlay = document.getElementById('lb-overlay');
-  const lbImg     = document.getElementById('lb-img');
-  const lbClose   = document.getElementById('lb-close');
-  let hoverTimer = null, isLocked = false, isOpen = false;
-
-  const style = document.createElement('style');
-  style.textContent = `
-    #lb-overlay {
-      position: fixed; inset: 0; z-index: 9000;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0); pointer-events: none; transition: background 0.25s;
-    }
-    #lb-overlay.visible { background: rgba(0,0,0,0.78); pointer-events: all; }
-    #lb-box {
-      position: relative; max-width: min(92vw, 900px); max-height: 92vh;
-      opacity: 0; transform: scale(0.88); transition: opacity 0.22s, transform 0.22s; pointer-events: none;
-    }
-    #lb-overlay.visible #lb-box { opacity: 1; transform: scale(1); pointer-events: all; }
-    #lb-img {
-      display: block; max-width: 100%; max-height: 92vh; width: auto; height: auto;
-      border-radius: 14px; box-shadow: 0 32px 80px rgba(0,0,0,0.55);
-      object-fit: contain; user-select: none; -webkit-user-drag: none;
-    }
-    #lb-close {
-      position: absolute; top: -14px; left: -14px; width: 38px; height: 38px;
-      background: #fff; border: none; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.3); color: #0a0a0a;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.2s, transform 0.2s, background 0.15s, color 0.15s; z-index: 1;
-    }
-    #lb-close svg { width: 16px; height: 16px; display: block; }
-    #lb-overlay.locked #lb-close { opacity: 1; pointer-events: auto; }
-    #lb-close:hover { transform: scale(1.12); background: #f0e8ff; color: #5e03fc; }
-    .team-full-card img, .about-main-block img, .postcard img, .portfolio-thumb img { cursor: zoom-in; }
-  `;
-  document.head.appendChild(style);
-
-  function openPreview(src, locked) {
-    lbImg.src = src; isLocked = locked; isOpen = true;
-    lbOverlay.classList.add('visible');
-    lbOverlay.classList.toggle('locked', locked);
-  }
-  function closeAll() {
-    clearTimeout(hoverTimer); isOpen = false; isLocked = false;
-    lbOverlay.classList.remove('visible', 'locked');
-  }
-  function attachToImage(img) {
-    if (img.closest('.nav-logo, .footer-logo, .s-icon, .value-icon, .contact-item-icon, .about-block-watermark')) return;
-    if (img.dataset.lbAttached) return;
-    img.dataset.lbAttached = '1';
-    const getSrc = () => img.src;
-
-    img.addEventListener('mouseenter', () => {
-      if (isLocked) return;
-      clearTimeout(hoverTimer);
-      hoverTimer = setTimeout(() => openPreview(getSrc(), false), HOVER_DELAY);
-    });
-    img.addEventListener('mouseleave', () => {
-      clearTimeout(hoverTimer);
-      if (!isLocked && isOpen) closeAll();
-    });
-    img.addEventListener('click', (e) => {
-      e.preventDefault(); e.stopPropagation();
-      clearTimeout(hoverTimer);
-      openPreview(getSrc(), true);
-    });
-
-    let touchTimer = null, touchMoved = false;
-    img.addEventListener('touchstart', () => {
-      touchMoved = false;
-      touchTimer = setTimeout(() => { if (!touchMoved) openPreview(getSrc(), false); }, HOVER_DELAY);
-    }, { passive: true });
-    img.addEventListener('touchmove', () => { touchMoved = true; clearTimeout(touchTimer); }, { passive: true });
-    img.addEventListener('touchend', () => {
-      clearTimeout(touchTimer);
-      if (!touchMoved && !isOpen) openPreview(getSrc(), true);
-      else if (!touchMoved && isOpen && !isLocked) { isLocked = true; lbOverlay.classList.add('locked'); }
-    });
-  }
-
-  document.querySelectorAll('img').forEach(attachToImage);
-  new MutationObserver(() => {
-    document.querySelectorAll('img:not([data-lb-attached])').forEach(attachToImage);
-  }).observe(document.body, { childList: true, subtree: true });
-
-  lbOverlay.addEventListener('click', (e) => { if (e.target === lbOverlay && isLocked) closeAll(); });
-  lbClose.addEventListener('click', closeAll);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && isOpen) closeAll(); });
 })();
